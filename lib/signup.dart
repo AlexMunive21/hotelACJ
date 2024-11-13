@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:principal/login.dart';
 import 'home_screen.dart';
 
 class SignupPage extends StatelessWidget {
@@ -102,7 +103,10 @@ class SignupPage extends StatelessWidget {
                   Text("¿Ya tienes una cuenta?"),
                   GestureDetector(
                     onTap: () {
-                      Navigator.pop(context);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => LoginPage()),
+                      );
                     },
                     child: Text(
                       " Iniciar Sesión",

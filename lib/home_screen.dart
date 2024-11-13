@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:principal/bebidas_screen.dart';
+import 'package:principal/comidas_screen.dart';
 import 'package:principal/user_screen.dart';
 import 'habitacion_screen.dart';
 import 'eventos_screen.dart';
@@ -86,25 +88,50 @@ class _HomeScreenState extends State<HomeScreen> {
                 Navigator.pop(context);
               },
             ),
-            ListTile(
+            ExpansionTile(
+              leading: Icon(Icons.restaurant_menu),
+              title: Text('Menú'),
+              children: [
+                ListTile(
+                  leading: Icon(Icons.local_bar),
+                  title: Text('Bebidas'),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => BebidasScreen()),
+                    );
+                  },
+                ),
+                ListTile(
+                  leading: Icon(Icons.fastfood),
+                  title: Text('Comidas'),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => ComidasScreen()),
+                    );
+                  },
+                ),
+              ],
+            ),
+            ExpansionTile(
               leading: Icon(Icons.settings),
               title: Text('Ajustes'),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.brightness_6),
-              title: Text('Modo oscuro'),
-              trailing: Switch(
-                value: isDarkMode,
-                onChanged: (value) {
-                  setState(() {
-                    isDarkMode = value;
-                  });
-                  widget.toggleDarkMode(value);
-                },
-              ),
+              children: [
+                ListTile(
+                  leading: Icon(Icons.brightness_6),
+                  title: Text('Modo oscuro'),
+                  trailing: Switch(
+                    value: isDarkMode,
+                    onChanged: (value) {
+                      setState(() {
+                        isDarkMode = value;
+                      });
+                      widget.toggleDarkMode(value);
+                    },
+                  ),
+                ),
+              ],
             ),
             ListTile(
               leading: Icon(Icons.logout),
