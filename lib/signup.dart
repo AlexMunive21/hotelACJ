@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'home_screen.dart';
 
 class SignupPage extends StatelessWidget {
   @override
@@ -33,7 +34,7 @@ class SignupPage extends StatelessWidget {
               Column(
                 children: <Widget>[
                   Text(
-                    "Sign up",
+                    "Registrate",
                     style: TextStyle(
                       fontSize: 30,
                       fontWeight: FontWeight.bold,
@@ -43,17 +44,17 @@ class SignupPage extends StatelessWidget {
                     height: 20,
                   ),
                   Text(
-                    "Create an account, It's free ",
+                    "Create una cuenta. Es gratis",
                     style: TextStyle(fontSize: 15, color: Colors.grey[700]),
                   )
                 ],
               ),
               Column(
                 children: <Widget>[
-                  inputFile(label: "Username"),
-                  inputFile(label: "Email"),
-                  inputFile(label: "Password", obscureText: true),
-                  inputFile(label: "Confirm Password ", obscureText: true),
+                  inputFile(label: "Nombre"),
+                  inputFile(label: "Correo"),
+                  inputFile(label: "Contraseña", obscureText: true),
+                  inputFile(label: "Confirmar Contraseña", obscureText: true),
                 ],
               ),
               Container(
@@ -69,14 +70,24 @@ class SignupPage extends StatelessWidget {
                 child: MaterialButton(
                   minWidth: double.infinity,
                   height: 60,
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => HomeScreen(
+                          toggleDarkMode: (value) {},
+                          isDarkMode: false,
+                        ),
+                      ),
+                    );
+                  },
                   color: Color(0xff0095FF),
                   elevation: 0,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(50),
                   ),
                   child: Text(
-                    "Sign up",
+                    "Registate",
                     style: TextStyle(
                       fontWeight: FontWeight.w600,
                       fontSize: 18,
@@ -88,10 +99,19 @@ class SignupPage extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Text("Already have an account?"),
-                  Text(
-                    " Login",
-                    style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
+                  Text("¿Ya tienes una cuenta?"),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text(
+                      " Iniciar Sesión",
+                      style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        fontSize: 18,
+                        color: Colors.blue,
+                      ),
+                    ),
                   )
                 ],
               )
@@ -103,7 +123,6 @@ class SignupPage extends StatelessWidget {
   }
 }
 
-// we will be creating a widget for text field
 Widget inputFile({label, obscureText = false}) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
