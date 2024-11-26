@@ -22,6 +22,16 @@ class _EventosScreenState extends State<EventosScreen> {
       'descripcion': 'Aprende los fundamentos de la fotografía.',
       'fecha': '5 de Mayo, 2024',
     },
+    {
+  'nombre': 'Clase de Yoga al Aire Libre',
+  'descripcion': 'Relájate y conecta con la naturaleza en esta clase especial.',
+  'fecha': '12 de Junio, 2024',
+  },
+  {
+  'nombre': 'Concierto de Jazz',
+  'descripcion': 'Disfruta de una velada mágica con música de jazz en vivo.',
+  'fecha': '25 de Julio, 2024',
+  },
   ];
 
   @override
