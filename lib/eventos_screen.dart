@@ -34,12 +34,22 @@ class _EventosScreenState extends State<EventosScreen> {
     },
   ];
 
+  void _agregarEvento() {
+    setState(() {
+      eventos.add({
+        'nombre': 'Nuevo Evento',
+        'descripcion': 'Descripción de prueba para el nuevo evento.',
+        'fecha': '1 de Enero, 2025',
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Lista de Eventos'),
-        centerTitle: true,
+        title: Text('Lista de Eventos (${eventos.length})'),
+        backgroundColor: Colors.teal,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -49,6 +59,7 @@ class _EventosScreenState extends State<EventosScreen> {
             final evento = eventos[index];
             return Card(
               margin: const EdgeInsets.only(bottom: 16.0),
+              color: Colors.teal.shade50,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(15.0),
               ),
@@ -75,49 +86,25 @@ class _EventosScreenState extends State<EventosScreen> {
                     ),
                   ],
                 ),
-                trailing: Column(
-                  children: [
-                    ElevatedButton(
-                      onPressed: () {
-                        showDialog(
-                          context: context,
-                          builder: (context) {
-                            return AlertDialog(
-                              title: Text('Evento Registrado'),
-                              content: Text(
-                                  'Te has registrado para el evento: ${evento['nombre']}'),
-                              actions: [
-                                TextButton(
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                  },
-                                  child: Text('OK'),
-                                ),
-                              ],
-                            );
-                          },
-                        );
-                      },
-                      child: Text('Registrar'),
-                    ),
-                    SizedBox(height: 8.0),
-                    ElevatedButton(
-                      onPressed: () {
-                        final snackBar = SnackBar(
-                          content: Text(
-                              'Compartiendo el evento: ${evento['nombre']}'),
-                          duration: Duration(seconds: 2),
-                        );
-                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                      },
-                      child: Text('Compartir'),
-                    ),
-                  ],
+                trailing: IconButton(
+                  icon: Icon(Icons.share, color: Colors.teal),
+                  onPressed: () {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text('Compartiste el evento: ${evento['nombre']}'),
+                      ),
+                    );
+                  },
                 ),
               ),
             );
           },
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _agregarEvento,
+        backgroundColor: Colors.teal,
+        child: Icon(Icons.add),
       ),
     );
   }
