@@ -23,20 +23,24 @@ class _EventosScreenState extends State<EventosScreen> {
       'fecha': '5 de Mayo, 2024',
     },
     {
-  'nombre': 'Clase de Yoga al Aire Libre',
-  'descripcion': 'Relájate y conecta con la naturaleza en esta clase especial.',
-  'fecha': '12 de Junio, 2024',
-  },
-  {
-  'nombre': 'Concierto de Jazz',
-  'descripcion': 'Disfruta de una velada mágica con música de jazz en vivo.',
-  'fecha': '25 de Julio, 2024',
-  },
+      'nombre': 'Clase de Yoga al Aire Libre',
+      'descripcion': 'Relájate y conecta con la naturaleza en esta clase especial.',
+      'fecha': '12 de Junio, 2024',
+    },
+    {
+      'nombre': 'Concierto de Jazz',
+      'descripcion': 'Disfruta de una velada mágica con música de jazz en vivo.',
+      'fecha': '25 de Julio, 2024',
+    },
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Lista de Eventos'),
+        centerTitle: true,
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: ListView.builder(
@@ -71,28 +75,44 @@ class _EventosScreenState extends State<EventosScreen> {
                     ),
                   ],
                 ),
-                trailing: ElevatedButton(
-                  onPressed: () {
-                    showDialog(
-                      context: context,
-                      builder: (context) {
-                        return AlertDialog(
-                          title: Text('Evento Registrado'),
-                          content: Text(
-                              'Te has registrado para el evento: ${evento['nombre']}'),
-                          actions: [
-                            TextButton(
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                              child: Text('OK'),
-                            ),
-                          ],
+                trailing: Column(
+                  children: [
+                    ElevatedButton(
+                      onPressed: () {
+                        showDialog(
+                          context: context,
+                          builder: (context) {
+                            return AlertDialog(
+                              title: Text('Evento Registrado'),
+                              content: Text(
+                                  'Te has registrado para el evento: ${evento['nombre']}'),
+                              actions: [
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: Text('OK'),
+                                ),
+                              ],
+                            );
+                          },
                         );
                       },
-                    );
-                  },
-                  child: Text('Registrar'),
+                      child: Text('Registrar'),
+                    ),
+                    SizedBox(height: 8.0),
+                    ElevatedButton(
+                      onPressed: () {
+                        final snackBar = SnackBar(
+                          content: Text(
+                              'Compartiendo el evento: ${evento['nombre']}'),
+                          duration: Duration(seconds: 2),
+                        );
+                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                      },
+                      child: Text('Compartir'),
+                    ),
+                  ],
                 ),
               ),
             );
